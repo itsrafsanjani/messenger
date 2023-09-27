@@ -75,15 +75,16 @@ if (localStorage.getItem('messages')) {
 function groupByIsReceived(data) {
   const groupedData = []
   let currentChunk = []
-  let currentIsReceived = data.length > 0 ? data[0].is_received : false
 
-  for (const item of data) {
-    if (item.is_received === currentIsReceived) {
-      currentChunk.push(item)
-    } else {
+  for (let i = 0; i < data.length; i++) {
+    const item = data[i]
+    const nextItem = data[i + 1]
+
+    currentChunk.push(item)
+
+    if (nextItem && item.is_received !== nextItem.is_received) {
       groupedData.push(currentChunk)
-      currentChunk = [item]
-      currentIsReceived = item.is_received
+      currentChunk = []
     }
   }
 
