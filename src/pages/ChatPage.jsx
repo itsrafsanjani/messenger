@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/24/solid'
 import { Link, NavLink } from 'react-router-dom'
 import { faker } from '@faker-js/faker'
+import { useEffect, useRef } from 'react'
 
 const menus = [
   {
@@ -52,7 +53,58 @@ for (let i = 0; i < 20; i++) {
   chats.push(chat)
 }
 
+let messages = []
+
+if (localStorage.getItem('messages')) {
+  messages = JSON.parse(localStorage.getItem('messages'))
+} else {
+  for (let i = 0; i < 1000; i++) {
+    const message = {
+      id: i,
+      body: faker.lorem.sentence(),
+      is_received: faker.datatype.boolean(),
+      // is_received: true,
+    }
+
+    messages.push(message)
+  }
+
+  localStorage.setItem('messages', JSON.stringify(messages))
+}
+
+function groupByIsReceived(data) {
+  const groupedData = []
+  let currentChunk = []
+  let currentIsReceived = data.length > 0 ? data[0].is_received : false
+
+  for (const item of data) {
+    if (item.is_received === currentIsReceived) {
+      currentChunk.push(item)
+    } else {
+      groupedData.push(currentChunk)
+      currentChunk = [item]
+      currentIsReceived = item.is_received
+    }
+  }
+
+  if (currentChunk.length > 0) {
+    groupedData.push(currentChunk)
+  }
+
+  return groupedData
+}
+
+const groupedMessages = groupByIsReceived(messages)
+
+console.log(groupedMessages)
+
 const ChatPage = () => {
+  const divRef = useRef(null)
+
+  useEffect(() => {
+    divRef.current.scrollIntoView()
+  })
+
   return (
     <div className='grid grid-cols-9 grid-flow-col h-screen'>
       <aside
@@ -116,45 +168,80 @@ const ChatPage = () => {
           </div>
 
           <div className='h-[calc(100vh-105px)] overflow-auto'>
-            {chats.length > 0
-              ? chats.map((chat, index) => {
-                  return (
-                    <Link
-                      to={'/chats/' + chat.id}
-                      key={chat.id}
-                      className='block px-[6px] mb-1'
+            {chats.length > 0 ? (
+              chats.map((chat, index) => {
+                return (
+                  <Link
+                    to={'/chats/' + chat.id}
+                    key={chat.id}
+                    className='block px-[6px] mb-1'
+                  >
+                    <div
+                      className={
+                        (index === 0 ? 'bg-gray-100 ' : ' ') +
+                        ' flex hover:bg-gray-100 rounded-lg transition-all'
+                      }
                     >
-                      <div
-                        className={
-                          (index === 0 ? 'bg-gray-100 ' : ' ') +
-                          ' flex hover:bg-gray-100 rounded-lg transition-all'
-                        }
-                      >
-                        <div className='flex items-center py-2 px-3 '>
-                          <img
-                            src={chat.image}
-                            alt='profile picture'
-                            className='h-12 w-12 rounded-full'
-                          />
-                          <div className='pl-3 flex flex-col space-y-1'>
-                            <h3 className='text-sm'>{chat.name}</h3>
-                            <div className='text-xs flex text-gray-500'>
-                              <p>{chat.last_message}</p>
-                              <time>{chat.last_message_at}</time>
-                            </div>
+                      <div className='flex items-center py-2 px-3 '>
+                        <img
+                          src={chat.image}
+                          alt='profile picture'
+                          className='h-12 w-12 rounded-full'
+                        />
+                        <div className='pl-3 flex flex-col space-y-1'>
+                          <h3 className='text-sm'>{chat.name}</h3>
+                          <div className='text-xs flex text-gray-500'>
+                            <p>{chat.last_message}</p>
+                            <time>{chat.last_message_at}</time>
                           </div>
                         </div>
                       </div>
-                    </Link>
-                  )
-                })
-              : (
-                <div className='text-center text-gray-500'>No chats found!</div>
-              )}
+                    </div>
+                  </Link>
+                )
+              })
+            ) : (
+              <div className='text-center text-gray-500'>No chats found!</div>
+            )}
           </div>
         </div>
       </aside>
-      <main className='col-span-4 border-r-2'>main</main>
+      <main className='relative col-span-4 border-r-2 h-[calc(100vh-60px)] overflow-auto'>
+        <div className='flex flex-col pt-3 space-y-2'>
+          {groupedMessages.map((messages, index) => {
+            return (
+              <ul key={index} className='group'>
+                {messages.map(({ id, is_received, body }) => {
+                  return (
+                    <li
+                      key={id}
+                      className={`clear-both max-w-[75%] p-1.5 px-4 m-0.5 lg:mx-6 shadow-md break-words break-all message ${
+                        is_received
+                          ? 'float-left justify-start mr-8 bg-[#0084ff] text-white him'
+                          : 'float-right ml-8 bg-[#e4e6eb] me'
+                      }`}
+                    >
+                      {body}
+                    </li>
+                  )
+                })}
+              </ul>
+            )
+          })}
+        </div>
+
+        <div ref={divRef}></div>
+
+        <div className='fixed bottom-0 h-[60px] w-[calc(100vw-55.55vw)]'>
+          <input
+            type='text'
+            name='body'
+            id='body'
+            placeholder='Enter message'
+            className='h-full w-full bg-gray-100 px-3 py-2 focus:outline-none'
+          />
+        </div>
+      </main>
       <aside className='col-span-2'>right sidebar</aside>
     </div>
   )
