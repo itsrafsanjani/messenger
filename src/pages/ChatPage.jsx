@@ -258,7 +258,7 @@ const ChatPage = () => {
             name="body"
             id="body"
             placeholder="Enter message"
-            className="h-[70%] w-[70%] bg-gray-100 px-2 py-1 mx-1 focus:outline-none rounded-full"
+            className="h-[70%] w-[70%] bg-gray-100 px-3 py-1 mx-1 focus:outline-none rounded-full"
           />
 
           <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
