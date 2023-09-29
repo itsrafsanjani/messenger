@@ -5,19 +5,22 @@ import {
   ChatBubbleOvalLeftEllipsisIcon,
   ChatBubbleOvalLeftIcon,
   ChevronRightIcon,
+  EllipsisHorizontalCircleIcon,
   FaceFrownIcon,
   GifIcon,
   HandThumbUpIcon,
   MagnifyingGlassIcon,
   PencilSquareIcon,
+  PhoneIcon,
   PhotoIcon,
   PlusCircleIcon,
   UsersIcon,
+  VideoCameraIcon,
 } from "@heroicons/react/24/solid";
 import { Link, NavLink } from "react-router-dom";
 import { faker } from "@faker-js/faker";
 import { useEffect, useRef } from "react";
-import ReactTimeAgo from 'react-time-ago'
+import ReactTimeAgo from "react-time-ago";
 import FacebookIcon from "../assets/facebook.svg";
 const menus = [
   {
@@ -196,11 +199,20 @@ const ChatPage = () => {
                           className="h-12 w-12 rounded-full"
                         />
                         <div className="pl-3 flex flex-col space-y-1">
-                          <h3 className="text-sm truncate max-w-[200px]">{chat.name}</h3>
+                          <h3 className="text-sm truncate max-w-[200px]">
+                            {chat.name}
+                          </h3>
                           <div className="text-xs flex text-gray-500">
-                            <p className="truncate max-w-[200px]">{chat.last_message}</p>
+                            <p className="truncate max-w-[200px]">
+                              {chat.last_message}
+                            </p>
                             <time className="pl-1">
-                            <ReactTimeAgo date={chat.last_message_at} locale="en-US" timeStyle="mini"/></time>
+                              <ReactTimeAgo
+                                date={chat.last_message_at}
+                                locale="en-US"
+                                timeStyle="mini"
+                              />
+                            </time>
                           </div>
                         </div>
                       </div>
@@ -214,55 +226,87 @@ const ChatPage = () => {
           </div>
         </div>
       </aside>
-      <main className="relative col-span-4 border-r-2 h-[calc(100vh-50px)] overflow-auto">
-        <div className="flex flex-col pt-3 pb-1 space-y-2">
-          {groupedMessages.map((messages, index) => {
-            return (
-              <ul key={index} className="group">
-                {messages.map(({ id, is_received, body }) => {
-                  return (
-                    <li
-                      key={id}
-                      className={`clear-both max-w-[75%] py-1.5 px-3 mb-0.5 lg:mx-6 break-words message text-sm ${
-                        is_received
-                          ? "float-left justify-start mr-8 bg-[#e4e6eb] him"
-                          : "float-right ml-8 bg-[#0084ff] text-white me"
-                      }`}
-                    >
-                      {body}
-                    </li>
-                  );
-                })}
-              </ul>
-            );
-          })}
+
+      <main className="border-r-2 col-span-4 flex flex-col h-[calc(100vh-50px)]">
+        <div className="bg-white flex h-[55px] items-center justify-between px-3 shadow w-[calc(100vw-55.55vw)]">
+          <Link
+            to="/"
+            className="hover:bg-gray-100 p-2 rounded flex items-center space-x-2"
+          >
+            <img
+              src="https://placehold.it/400x400"
+              alt="profile picture"
+              className="w-8 h-8 rounded-full"
+            />
+
+            <h3>Rafsan Jani Rafin</h3>
+          </Link>
+
+          <div className="flex justify-between space-x-5 text-[#0084ff]">
+            <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full flex justify-center items-center h-8 w-8">
+              <PhoneIcon className="h-5 w-5 " />
+            </div>
+
+            <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full flex justify-center items-center h-8 w-8">
+              <VideoCameraIcon className="h-5 w-5 " />
+            </div>
+
+            <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full flex justify-center items-center h-8 w-8">
+              <EllipsisHorizontalCircleIcon className="h-5 w-5 " />
+            </div>
+          </div>
         </div>
 
-        <div ref={divRef}></div>
+        <div className="overflow-auto py-1">
+          <div className="flex flex-col space-y-2">
+            {groupedMessages.map((messages, index) => {
+              return (
+                <ul key={index} className="group">
+                  {messages.map(({ id, is_received, body }) => {
+                    return (
+                      <li
+                        key={id}
+                        className={`clear-both max-w-[75%] py-1.5 px-3 mb-0.5 lg:mx-6 break-words message text-sm ${
+                          is_received
+                            ? "float-left justify-start mr-8 bg-[#e4e6eb] him"
+                            : "float-right ml-8 bg-[#0084ff] text-white me"
+                        }`}
+                      >
+                        {body}
+                      </li>
+                    );
+                  })}
+                </ul>
+              );
+            })}
+          </div>
 
-        <div className="flex items-center justify-between fixed bottom-0 h-[50px] w-[calc(100vw-55.55vw)] px-3">
-          <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
-            <PlusCircleIcon className="w-5 h-5" />
-          </div>
-          <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
-            <PhotoIcon className="w-5 h-5" />
-          </div>
-          <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
-            <FaceFrownIcon className="w-5 h-5" />
-          </div>
-          <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
-            <GifIcon className="w-5 h-5" />
-          </div>
-          <input
-            type="text"
-            name="body"
-            id="body"
-            placeholder="Enter message"
-            className="h-[70%] w-[70%] bg-gray-100 px-3 py-1 mx-1 focus:outline-none rounded-full"
-          />
+          <div ref={divRef}></div>
 
-          <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
-            <HandThumbUpIcon className="w-5 h-5" />
+          <div className="flex items-center justify-between fixed bottom-0 h-[50px] w-[calc(100vw-55.55vw)] px-3">
+            <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
+              <PlusCircleIcon className="w-5 h-5" />
+            </div>
+            <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
+              <PhotoIcon className="w-5 h-5" />
+            </div>
+            <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
+              <FaceFrownIcon className="w-5 h-5" />
+            </div>
+            <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
+              <GifIcon className="w-5 h-5" />
+            </div>
+            <input
+              type="text"
+              name="body"
+              id="body"
+              placeholder="Enter message"
+              className="h-[70%] w-[70%] bg-gray-100 px-3 py-1 mx-1 focus:outline-none rounded-full"
+            />
+
+            <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
+              <HandThumbUpIcon className="w-5 h-5" />
+            </div>
           </div>
         </div>
       </main>
