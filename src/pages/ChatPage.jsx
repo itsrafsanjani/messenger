@@ -5,8 +5,13 @@ import {
   ChatBubbleOvalLeftEllipsisIcon,
   ChatBubbleOvalLeftIcon,
   ChevronRightIcon,
+  FaceFrownIcon,
+  GifIcon,
+  HandThumbUpIcon,
   MagnifyingGlassIcon,
   PencilSquareIcon,
+  PhotoIcon,
+  PlusCircleIcon,
   UsersIcon,
 } from "@heroicons/react/24/solid";
 import { Link, NavLink } from "react-router-dom";
@@ -140,7 +145,7 @@ const ChatPage = () => {
 
         <div
           role="chat list"
-          className="flex flex-col border-r-2 col-span-6 overflow-auto"
+          className="flex flex-col col-span-6 overflow-auto"
         >
           <div className="h-[105px] sticky top-0 bg-white">
             <div className="flex justify-between items-center py-3 px-8">
@@ -209,8 +214,8 @@ const ChatPage = () => {
           </div>
         </div>
       </aside>
-      <main className="relative col-span-4 border-r-2 h-[calc(100vh-60px)] overflow-auto">
-        <div className="flex flex-col pt-3 space-y-2">
+      <main className="relative col-span-4 border-r-2 h-[calc(100vh-50px)] overflow-auto">
+        <div className="flex flex-col pt-3 pb-1 space-y-2">
           {groupedMessages.map((messages, index) => {
             return (
               <ul key={index} className="group">
@@ -235,14 +240,30 @@ const ChatPage = () => {
 
         <div ref={divRef}></div>
 
-        <div className="fixed bottom-0 h-[60px] w-[calc(100vw-55.55vw)]">
+        <div className="flex items-center justify-between fixed bottom-0 h-[50px] w-[calc(100vw-55.55vw)] px-3">
+          <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
+            <PlusCircleIcon className="w-5 h-5" />
+          </div>
+          <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
+            <PhotoIcon className="w-5 h-5" />
+          </div>
+          <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
+            <FaceFrownIcon className="w-5 h-5" />
+          </div>
+          <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
+            <GifIcon className="w-5 h-5" />
+          </div>
           <input
             type="text"
             name="body"
             id="body"
             placeholder="Enter message"
-            className="h-full w-full bg-gray-100 px-3 py-2 focus:outline-none"
+            className="h-[70%] w-[70%] bg-gray-100 px-2 py-1 mx-1 focus:outline-none rounded-full"
           />
+
+          <div className="cursor-pointer hover:bg-gray-200 text-[#0084ff] p-2 rounded-full">
+            <HandThumbUpIcon className="w-5 h-5" />
+          </div>
         </div>
       </main>
       <aside className="col-span-2">
