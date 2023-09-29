@@ -242,17 +242,17 @@ const ChatPage = () => {
             <h3>Rafsan Jani Rafin</h3>
           </Link>
 
-          <div className="flex justify-between space-x-5 text-[#0084ff]">
-            <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full flex justify-center items-center h-8 w-8">
-              <PhoneIcon className="h-5 w-5 " />
+          <div className="flex justify-between space-x-2 text-[#0084ff]">
+            <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full flex justify-center items-center h-9 w-9">
+              <PhoneIcon className="h-6 w-6 " />
             </div>
 
-            <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full flex justify-center items-center h-8 w-8">
-              <VideoCameraIcon className="h-5 w-5 " />
+            <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full flex justify-center items-center h-9 w-9">
+              <VideoCameraIcon className="h-6 w-6 " />
             </div>
 
-            <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full flex justify-center items-center h-8 w-8">
-              <EllipsisHorizontalCircleIcon className="h-5 w-5 " />
+            <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full flex justify-center items-center h-9 w-9">
+              <EllipsisHorizontalCircleIcon className="h-6 w-6 " />
             </div>
           </div>
         </div>
@@ -315,7 +315,7 @@ const ChatPage = () => {
           <img
             src="https://placehold.it/400x400"
             alt="profile picture"
-            className="w-16 h-16 rounded-full"
+            className="w-[72px] h-[72px] rounded-full"
           />
           <div>
             <Link to="/" className="hover:underline">
