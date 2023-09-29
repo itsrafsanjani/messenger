@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: system-ui, -apple-system, "system-ui", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 .message {
   border-radius: 18px;
 }

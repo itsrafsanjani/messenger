@@ -3,7 +3,7 @@ import ChatPage from './pages/ChatPage'
 function App() {
   return (
     <BrowserRouter>
-      <div className='font-sans h-screen'>
+      <div className='h-screen'>
         <Routes>
           <Route path='/' element={<ChatPage />}></Route>
         </Routes>
