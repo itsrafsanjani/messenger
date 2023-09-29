@@ -17,6 +17,7 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import { faker } from "@faker-js/faker";
 import { useEffect, useRef } from "react";
+import ReactTimeAgo from 'react-time-ago'
 import FacebookIcon from "../assets/facebook.svg";
 const menus = [
   {
@@ -54,7 +55,7 @@ for (let i = 0; i < 20; i++) {
     name: faker.person.fullName(), // Generate a random name
     image: "https://placehold.it/400x400", // Generate a random avatar image
     last_message: faker.lorem.sentence(4), // Generate a random last message
-    last_message_at: faker.date.recent({ days: 7 }).toLocaleTimeString(), // Generate a random recent date
+    last_message_at: faker.date.recent({ days: 7 }), // Generate a random recent date
   };
 
   chats.push(chat);
@@ -65,7 +66,7 @@ let messages = [];
 if (localStorage.getItem("messages")) {
   messages = JSON.parse(localStorage.getItem("messages"));
 } else {
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 50; i++) {
     const message = {
       id: i,
       body: faker.lorem.sentence(),
@@ -103,8 +104,6 @@ function groupByIsReceived(data) {
 }
 
 const groupedMessages = groupByIsReceived(messages);
-
-console.log(groupedMessages);
 
 const ChatPage = () => {
   const divRef = useRef(null);
@@ -197,10 +196,11 @@ const ChatPage = () => {
                           className="h-12 w-12 rounded-full"
                         />
                         <div className="pl-3 flex flex-col space-y-1">
-                          <h3 className="text-sm">{chat.name}</h3>
+                          <h3 className="text-sm truncate max-w-[200px]">{chat.name}</h3>
                           <div className="text-xs flex text-gray-500">
-                            <p>{chat.last_message}</p>
-                            <time>{chat.last_message_at}</time>
+                            <p className="truncate max-w-[200px]">{chat.last_message}</p>
+                            <time className="pl-1">
+                            <ReactTimeAgo date={chat.last_message_at} locale="en-US" timeStyle="mini"/></time>
                           </div>
                         </div>
                       </div>
@@ -223,7 +223,7 @@ const ChatPage = () => {
                   return (
                     <li
                       key={id}
-                      className={`clear-both max-w-[75%] p-1.5 px-4 mb-0.5 lg:mx-6 break-words break-all message text-sm ${
+                      className={`clear-both max-w-[75%] py-1.5 px-3 mb-0.5 lg:mx-6 break-words message text-sm ${
                         is_received
                           ? "float-left justify-start mr-8 bg-[#e4e6eb] him"
                           : "float-right ml-8 bg-[#0084ff] text-white me"
