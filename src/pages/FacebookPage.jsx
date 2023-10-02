@@ -220,6 +220,43 @@ const FacebookPage = () => {
           </button>
         </div>
       </header>
+
+      <main className="flex justify-between space-y-2">
+        <aside className="flex flex-col justify-between px-3 pt-3 space-y-2">
+          <div className="flex space-x-2">
+            <img src="https://placehold.it/50x50" alt="icon" className="shadow w-10 h-10 rounded-full" />
+            <h3>MD Rafsan Jani Rafin</h3>
+          </div>
+          <div className="flex space-x-2">
+            <img src="https://placehold.it/50x50" alt="icon" className="shadow w-10 h-10 rounded-full" />
+            <h3>Friends</h3>
+          </div>
+          <div className="flex space-x-2">
+            <img src="https://placehold.it/50x50" alt="icon" className="shadow w-10 h-10 rounded-full" />
+            <h3>Feeds</h3>
+          </div>
+          <div className="flex space-x-2">
+            <img src="https://placehold.it/50x50" alt="icon" className="shadow w-10 h-10 rounded-full" />
+            <h3>Groups</h3>
+          </div>
+          <div className="flex space-x-2">
+            <img src="https://placehold.it/50x50" alt="icon" className="shadow w-10 h-10 rounded-full" />
+            <h3>Marketplace</h3>
+          </div>
+          <div className="flex space-x-2">
+            <img src="https://placehold.it/50x50" alt="icon" className="shadow w-10 h-10 rounded-full" />
+            <h3>Video</h3>
+          </div>
+          <div className="flex space-x-2">
+            <img src="https://placehold.it/50x50" alt="icon" className="shadow w-10 h-10 rounded-full" />
+            <h3>See more</h3>
+          </div>
+          <div className="flex space-x-2">
+            <img src="https://placehold.it/50x50" alt="icon" className="shadow w-10 h-10 rounded-full" />
+            <h3>Your shortcuts</h3>
+          </div>
+        </aside>
+      </main>
     </div>
   );
 };
