@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ChatPage from "./pages/ChatPage";
+import FacebookPage from "./pages/FacebookPage";
+import MessengerPage from "./pages/MessengerPage";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
         <BrowserRouter>
           <div className="h-screen">
             <Routes>
-              <Route path="/" element={<ChatPage />}></Route>
+              <Route path="/" element={<FacebookPage />}></Route>
+              <Route path="/messenger" element={<MessengerPage />}></Route>
             </Routes>
           </div>
         </BrowserRouter>

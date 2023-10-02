@@ -6,6 +6,16 @@ body {
   font-family: system-ui, -apple-system, "system-ui", 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+path,
+circle,
+ellipse,
+line,
+polygon,
+polyline,
+rect {
+  stroke-width: inherit;
+}
+
 .message {
   border-radius: 18px;
 }
@@ -39,3 +49,14 @@ body {
 .group li:last-of-type.him {
   border-bottom-left-radius: 18px;
 }
+
+/* facebook */
+.bottomBorder {
+  display: none;
+}
+
+.activeFbNavItem + .bottomBorder {
+  display: block;
+}
+
+

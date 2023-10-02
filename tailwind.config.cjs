@@ -8,7 +8,15 @@ module.exports = {
     fontFamily: {
       sans: ['"Open Sans"', "sans-serif"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#0866FF',
+        secondary: '#E4E6EB',
+        'secondary-light': '#f1f5f9',
+        'secondary-medium': '#F0F2F5',
+        'secondary-dark': '#D8DADF',
+      }
+    },
   },
   plugins: [],
 }

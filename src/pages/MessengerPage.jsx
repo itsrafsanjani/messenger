@@ -108,7 +108,7 @@ function groupByIsReceived(data) {
 
 const groupedMessages = groupByIsReceived(messages);
 
-const ChatPage = () => {
+const MessengerPage = () => {
   const divRef = useRef(null);
 
   useEffect(() => {
@@ -386,4 +386,4 @@ const ChatPage = () => {
   );
 };
 
-export default ChatPage;
+export default MessengerPage;
